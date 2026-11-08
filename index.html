@@ -1,0 +1,603 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Engineering portfolio covering systems engineering, cybersecurity, embedded systems and cloud technologies.">
+  <title>Engineering Portfolio | Systems · Security · Hardware</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .projects-section .project-detail {
+      margin-top: 30px;
+      background: rgba(17, 30, 49, 0.45);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 28px 28px 18px;
+      box-shadow: 0 18px 30px rgba(0,0,0,0.14);
+    }
+    .project-header h3 {
+      margin: 0 0 8px;
+      font-size: clamp(26px, 2vw, 40px);
+      letter-spacing: -0.04em;
+      line-height: 1.15;
+      font-weight: 800;
+    }
+    .project-domain {
+      margin: 0 0 20px;
+      color: #b9c5d8;
+      font-size: 15px;
+    }
+    .project-body h4 {
+      margin: 0 0 10px;
+      font-size: 15px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #f29a45;
+      font-family: 'DM Mono', monospace;
+    }
+    .project-body p,
+    .project-body li {
+      color: #dfe7f4;
+      font-size: 16px;
+      line-height: 1.7;
+      margin: 0 0 12px;
+    }
+    .project-body ul {
+      margin: 10px 0 18px 18px;
+      padding: 0;
+    }
+    .project-body strong {
+      color: #ffffff;
+    }
+    .project-body .mini-heading {
+      margin: 16px 0 8px;
+      font-size: 15px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #a8c9f8;
+      font-family: 'DM Mono', monospace;
+    }
+    .project-body .subheading {
+      margin: 6px 0 8px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #ecf2ff;
+    }
+    .architecture-visual {
+      margin-top: 18px;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(11,20,36,0.7);
+    }
+    .arch-block {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 92px;
+      background: #1b2b3a;
+      color: #f2f7ff;
+      padding: 18px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .arch-block .label {
+      display: block;
+      font-size: 14px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-family: 'DM Mono', monospace;
+    }
+    .arch-block .sub {
+      display: block;
+      font-size: 13px;
+      opacity: 0.8;
+      margin-top: 7px;
+      font-family: 'DM Mono', monospace;
+      letter-spacing: 0.08em;
+    }
+    .arch-arrow {
+      text-align: center;
+      padding: 10px 0;
+      color: #d7dbe0;
+      font-size: 22px;
+      line-height: 1;
+      background: rgba(255,255,255,0.02);
+    }
+    .decision-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 20px 14px 18px;
+      background: rgba(20,35,49,0.8);
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .decision-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 110px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-family: 'DM Mono', monospace;
+      font-weight: 600;
+    }
+    .decision-pill.allow { background: rgba(99,176,111,0.2); color: #7ae29d; }
+    .decision-pill.deny { background: rgba(230,104,81,0.2); color: #ff9d88; }
+    .decision-pill.review { background: rgba(247,191,94,0.18); color: #f6d77e; }
+    .pipeline-steps {
+      display: grid;
+      gap: 18px;
+      margin-top: 18px;
+      padding-top: 6px;
+    }
+    .pipeline-step {
+      display: grid;
+      grid-template-columns: 54px 1fr;
+      gap: 18px;
+      align-items: center;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .pipeline-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 54px;
+      height: 54px;
+      border-radius: 12px;
+      background: rgba(103,198,141,0.18);
+      color: #e7fff1;
+      font-weight: 800;
+      font-size: 1.2rem;
+    }
+    .pipeline-step .text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .pipeline-step .title {
+      font-size: clamp(18px, 1.6vw, 28px);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: #edf4ff;
+      text-transform: uppercase;
+    }
+    .pipeline-step .meta {
+      color: #b9c5d8;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+    .metric-box {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      font-size: 1.05rem;
+      color: #dfe7f4;
+    }
+    .metric-box .metric {
+      font-size: clamp(28px, 3vw, 54px);
+      font-weight: 800;
+      color: #81dba0;
+      display: inline-block;
+      margin-right: 10px;
+      letter-spacing: -0.05em;
+    }
+    .life-architecture {
+      margin-top: 18px;
+      background: rgba(12, 27, 32, 0.65);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .life-layer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      min-height: 88px;
+      padding: 18px 24px;
+      background: #1b453b;
+      color: #f2f9f7;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .life-layer .title {
+      font-size: clamp(15px, 1.8vw, 22px);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+    .life-layer .subtitle {
+      display: block;
+      margin-top: 8px;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: none;
+      color: #d0e4de;
+      font-family: 'DM Mono', monospace;
+    }
+    .life-controllers {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(150px, 1fr));
+      gap: 12px;
+      padding: 18px 16px;
+      background: rgba(18,44,39,0.75);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .life-controller {
+      background: rgba(92, 146, 115, 0.22);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 18px 10px;
+      text-align: center;
+      color: #edfef7;
+    }
+    .life-controller strong {
+      display: block;
+      font-size: 18px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .life-controller span {
+      display: block;
+      font-size: 14px;
+      color: #dfece5;
+      opacity: 0.9;
+    }
+    .life-compartment {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      min-height: 80px;
+      background: rgba(55, 110, 93, 0.25);
+      color: #f1f9f8;
+      padding: 12px 18px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .life-compartment .title {
+      font-size: clamp(16px, 1.8vw, 28px);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+    .life-compartment .pills {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+    .life-compartment .pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 12px;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      font-family: 'DM Mono', monospace;
+      color: #f4f9ff;
+      background: rgba(255,255,255,0.1);
+    }
+    .life-compartment .pill:nth-child(2) { background: rgba(133, 174, 255, 0.18); }
+    .life-compartment .pill:nth-child(3) { background: rgba(202, 163, 255, 0.18); }
+    @media (max-width: 720px) {
+      .projects-section .project-detail { padding: 22px 18px 16px; }
+      .life-controllers { grid-template-columns: 1fr; }
+      .pipeline-step { grid-template-columns: 42px 1fr; gap: 12px; }
+      .pipeline-number { width: 42px; height: 42px; }
+      .arch-block { min-height: 72px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="Home"><span class="brand-mark">C</span><span>ENGINEERING<span class="muted"> / PORTFOLIO</span></span></a>
+    <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+    <nav class="nav">
+      <a href="#domains">Domains</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#research">Research</a>
+      <a class="nav-contact" href="#contact">Contact ↗</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero section" id="home">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="status-dot"></span> ENGINEERING PORTFOLIO • 2026</p>
+        <h1>LEELADITHYA SIMMA</h1>
+        <h2 class="gradient-text">Secure Systems Engineering.</h2>
+        <p class="hero-intro">From silicon to enterprise systems.</p>
+        <p class="hero-description">Electronics engineering student focused on building secure, reliable and scalable systems across embedded platforms, enterprise software and security architecture.</p>
+        <div class="hero-tags">
+          <span>SYSTEMS</span>
+          <span>EMBEDDED</span>
+          <span>SECURITY</span>
+          <span>CLOUD</span>
+        </div>
+        <p class="hero-credential">B.E. ECE • BMSIT Bangalore • CGPA 8.9</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#projects">Explore Projects <span>↘</span></a>
+          <a class="button button-quiet" href="#about">About Me</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-label="Abstract systems architecture illustration">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="core"><span>SYS</span><small>CORE</small></div>
+        <div class="node node-security"><i></i><b>SECURITY</b><small>Intent / Trust</small></div>
+        <div class="node node-hardware"><i></i><b>HARDWARE</b><small>Firmware / Edge</small></div>
+        <div class="node node-cloud"><i></i><b>CLOUD + AI</b><small>Services / Agents</small></div>
+        <div class="node node-data"><i></i><b>SYSTEMS</b><small>Architecture / APIs</small></div>
+        <div class="visual-caption">FIG 01. &nbsp; CONNECTED ENGINEERING DOMAINS</div>
+      </div>
+    </section>
+
+    <section class="section intro-strip" id="about">
+      <p class="eyebrow">01 — ABOUT ME</p>
+      <div>
+        <h2>I am <strong>Leeladithya Simma</strong>, a final-year B.E. Electronics and Communication Engineering student at BMSIT, Bangalore, with a CGPA of 8.9.</h2>
+        <p>My journey with computers, programming and cybersecurity began in the 8th grade. What started as an early curiosity gradually developed into a deeper interest in understanding how computing systems operate, where their vulnerabilities emerge, and how they can be engineered to become more secure.</p>
+        <p>During my early journey, I also conducted free theoretical workshops on ethical hacking, sharing foundational cybersecurity concepts with other learners.</p>
+        <p>Over time, that interest evolved beyond cybersecurity into a broader engineering perspective.</p>
+        <p>Today, my focus lies in <strong>Systems Engineering, Security Architecture, Embedded Systems and Enterprise Software Development</strong>.</p>
+        <p>I have worked across multiple engineering domains to understand how real-world systems operate under practical constraints — from ESP32-based embedded prototypes and hardware-software integration to enterprise backend applications and IgniteAuth, my intent-validation security framework.</p>
+        <p>I believe that modern systems must be engineered around five fundamental architectural considerations:</p>
+        <ul>
+          <li><strong>Performance</strong> — Efficient execution and resource utilization.</li>
+          <li><strong>Reliability</strong> — Predictable behaviour under varying conditions.</li>
+          <li><strong>Security</strong> — Enforcing trust boundaries and validating operations.</li>
+          <li><strong>Scalability</strong> — Supporting growth without compromising system integrity.</li>
+          <li><strong>Delivery</strong> — Translating engineering decisions into working, maintainable solutions.</li>
+        </ul>
+        <p>My central objective is to engineer systems where security is not an afterthought, but a fundamental architectural property.</p>
+        <p><strong>Secure Systems Engineering is the direction I intend to pursue.</strong></p>
+      </div>
+    </section>
+
+    <section class="section" id="domains">
+      <div class="section-heading"><div><p class="eyebrow">02 — TECHNICAL DOMAINS</p><h2>Four connected disciplines.</h2></div><p class="section-note">A growing engineering toolkit, built through projects, experiments and practical work.</p></div>
+      <div class="domain-grid">
+        <article class="domain-card security"><span class="domain-index">01 / TRUST</span><div class="domain-icon">◇</div><h3>Cybersecurity</h3><p>Intent validation, access boundaries, threat modelling and secure system design.</p><div class="tags"><span>IgniteAuth</span><span>API Security</span><span>Policy</span></div></article>
+        <article class="domain-card systems"><span class="domain-index">02 / ARCHITECTURE</span><div class="domain-icon">⌘</div><h3>Systems Engineering</h3><p>System APIs, backend services, subsystem integration and operational visibility.</p><div class="tags"><span>System Design</span><span>.NET</span><span>Databases</span></div></article>
+        <article class="domain-card hardware"><span class="domain-index">03 / EDGE</span><div class="domain-icon">⌁</div><h3>Hardware & Firmware</h3><p>Embedded concepts, microcontrollers, sensors, actuation and hardware-software interfaces.</p><div class="tags"><span>Embedded C</span><span>Sensors</span><span>Electronics</span></div></article>
+        <article class="domain-card cloud"><span class="domain-index">04 / SCALE</span><div class="domain-icon">☁</div><h3>Cloud & Intelligent Systems</h3><p>Cloud-connected applications, service integration and bounded agentic workflows.</p><div class="tags"><span>Cloud</span><span>APIs</span><span>Agentic AI</span></div></article>
+      </div>
+    </section>
+
+    <section class="section projects-section" id="projects">
+      <div class="section-heading"><div><p class="eyebrow">03 — SELECTED WORK</p><h2>Projects with a purpose.</h2></div><p class="section-note">A selection of engineering work spanning security architecture, brain-computer interfaces and embedded systems.</p></div>
+
+      <article class="project-detail">
+        <div class="project-header">
+          <h3>IgniteAuth — Intent Validation Security Framework</h3>
+          <p class="project-domain"><strong>Engineering Domain:</strong> Security Architecture · Systems Engineering · Application Security</p>
+        </div>
+
+        <div class="project-body">
+          <h4>Overview</h4>
+          <p>IgniteAuth is an intent-validation security framework designed to evaluate the legitimacy of system operations before they reach their execution layer.</p>
+          <p>The framework addresses a fundamental security problem: an authenticated and trusted client can still initiate an unintended or contextually inappropriate operation.</p>
+          <p>Rather than relying exclusively on authentication and conventional access permissions, IgniteAuth introduces an additional validation layer that evaluates operational intent, authority, access, context and request origin before allowing a system operation to proceed.</p>
+
+          <p class="mini-heading">V0.9 — Reference System Protection</p>
+          <p>Successfully implemented a working prototype integrating an Angular client, ASP.NET Core backend and PostgreSQL database.</p>
+          <p>The framework demonstrates protection of a simulated reference system against authenticated client requests that attempt to execute operations without the required operational intent and contextual validity.</p>
+
+          <p class="subheading">Key capabilities:</p>
+          <ul>
+            <li>Centralized intent-validation decision layer.</li>
+            <li>Control-plane separation from the execution layer.</li>
+            <li>Subsystem and operation mapping.</li>
+            <li>Context-aware ALLOW / DENY decisions.</li>
+            <li>HMAC-SHA256-based integrity mechanisms.</li>
+            <li>Validation responses and decision auditing.</li>
+          </ul>
+
+          <p class="mini-heading">V1.0 — Agentic System Security (Under Design)</p>
+          <p>The next iteration aims to extend intent validation to agentic environments.</p>
+          <p>The objective is to prevent an autonomous or rogue AI agent from executing unintended operations across business systems and their underlying subsystems.</p>
+          <p>The proposed architecture introduces a Human-in-the-Loop Intent Validation Engine within the system control plane.</p>
+          <p>Before an agent-initiated operation reaches the execution layer, its intent, authority, target subsystem and execution context must be evaluated. Human approval will be incorporated for operations requiring additional authorization.</p>
+
+          <p class="mini-heading">Core Engineering Principle</p>
+          <p>A trusted identity does not automatically make every requested operation trustworthy.</p>
+          <p><strong>IgniteAuth aims to make intent validation a fundamental security boundary in modern software systems.</strong></p>
+        </div>
+
+        <div class="architecture-visual">
+          <div class="arch-block"><div><span class="label">Client / AI agent</span><span class="sub">Authenticated request · Intended operation</span></div></div>
+          <div class="arch-arrow">↓</div>
+          <div class="arch-block"><div><span class="label">System control plane</span><span class="sub">IgniteAuth Policy Engine</span></div></div>
+          <div class="decision-row">
+            <span class="decision-pill allow">Allow</span>
+            <span class="decision-pill deny">Deny</span>
+            <span class="decision-pill review">Human Review</span>
+          </div>
+          <div class="arch-arrow">↓</div>
+          <div class="arch-block"><div><span class="label">Execution / Data plane</span><span class="sub">Business systems · Subsystems · APIs</span></div></div>
+        </div>
+      </article>
+
+      <article class="project-detail">
+        <div class="project-header">
+          <h3>EEG Motor Imagery — Brain-Computer Interface Pipeline</h3>
+          <p class="project-domain"><strong>Engineering Domain:</strong> EEG Signal Processing · Brain-Computer Interfaces · Machine Learning</p>
+        </div>
+
+        <div class="project-body">
+          <h4>Overview</h4>
+          <p>Developed an EEG-based Motor Imagery classification pipeline to translate imagined motor movements into keyboard directional commands.</p>
+          <p>The project explored the use of brain-computer interface technology to classify imagined movements into Left, Middle and Right categories, enabling interaction with a computer-based game without conventional physical input.</p>
+
+          <p class="mini-heading">Data acquisition</p>
+          <ul>
+            <li>Conducted EEG data acquisition using a Mitsar 21-channel EEG headset.</li>
+            <li>Collected experimental data from 11 subjects.</li>
+            <li>Used motor imagery events as the basis for classification and subsequent game interaction.</li>
+          </ul>
+
+          <p class="mini-heading">Signal processing & classification pipeline</p>
+          <div class="pipeline-steps">
+            <div class="pipeline-step">
+              <div class="pipeline-number">01</div>
+              <div class="text">
+                <div class="title">EEG Data Acquisition</div>
+                <div class="meta">Mitsar · 21 channels · 11 subjects</div>
+              </div>
+            </div>
+            <div class="pipeline-step">
+              <div class="pipeline-number">02</div>
+              <div class="text">
+                <div class="title">Signal Preprocessing</div>
+                <div class="meta">Notch filtering · Signal preparation</div>
+              </div>
+            </div>
+            <div class="pipeline-step">
+              <div class="pipeline-number">03</div>
+              <div class="text">
+                <div class="title">Event Mapping</div>
+                <div class="meta">BCI event markers · Motor imagery segments</div>
+              </div>
+            </div>
+            <div class="pipeline-step">
+              <div class="pipeline-number">04</div>
+              <div class="text">
+                <div class="title">Feature Extraction</div>
+                <div class="meta">FBCSP · PSD · Frequency features</div>
+              </div>
+            </div>
+            <div class="pipeline-step">
+              <div class="pipeline-number">05</div>
+              <div class="text">
+                <div class="title">Classification</div>
+                <div class="meta">Left · Middle · Right</div>
+              </div>
+            </div>
+            <div class="pipeline-step">
+              <div class="pipeline-number">06</div>
+              <div class="text">
+                <div class="title">Interactive Output</div>
+                <div class="meta">Keyboard mapping · Game control</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="metric-box"><span class="metric">~70%</span> Reported experimental classification accuracy. Specify the evaluation split and metric when publishing the research results.</div>
+        </div>
+      </article>
+
+      <article class="project-detail">
+        <div class="project-header">
+          <h3>LifeSync — Intelligent Medication Management System</h3>
+          <p class="project-domain"><strong>Engineering Domain:</strong> Embedded Systems · Hardware-Software Integration · IoT · Intelligent Automation</p>
+        </div>
+
+        <div class="project-body">
+          <h4>Overview</h4>
+          <p>LifeSync is an intelligent, three-compartment medication management prototype designed to address common medication-management challenges faced by elderly patients.</p>
+          <p>These include forgetting scheduled medication, selecting the wrong pills and taking incorrect dosages.</p>
+          <p>The system combines event-based scheduling, embedded hardware, sensor feedback, automated compartment locking and real-time data synchronization to improve medication organization and user interaction.</p>
+
+          <p class="mini-heading">System Architecture & Components</p>
+          <p class="subheading">1. Event-Based Medication Scheduling</p>
+          <ul>
+            <li>Configurable morning, afternoon/evening and night medication schedules.</li>
+            <li>Timer-driven medication events.</li>
+            <li>Real-time notifications and scheduled medication information.</li>
+          </ul>
+
+          <p class="subheading">2. Embedded Hardware Integration</p>
+          <ul>
+            <li>Hall-effect sensors for detecting compartment interaction and providing feedback.</li>
+            <li>Servo motors acting as compartment locking mechanisms.</li>
+            <li>OLED display for real-time medication alerts and schedule information.</li>
+            <li>Three-compartment physical dispensing architecture.</li>
+          </ul>
+
+          <p class="subheading">3. Software & Data Management</p>
+          <ul>
+            <li>Real-time database integration with the ESP-based hardware system.</li>
+            <li>Online and offline operating modes.</li>
+            <li>Hardware-to-database state synchronization.</li>
+            <li>Software-side state handling and medication event management.</li>
+          </ul>
+
+          <p class="subheading">4. Intelligent Prescription Management — Planned Capability</p>
+          <ul>
+            <li>AI-assisted prescription-to-compartment allocation.</li>
+            <li>Pill verification workflow before insertion.</li>
+            <li>Medication-to-compartment mapping to reduce incorrect placement.</li>
+          </ul>
+
+          <p class="mini-heading">Engineering Objective</p>
+          <p>Build a connected medication management system in which software scheduling, embedded hardware and physical compartment states operate as a coordinated system.</p>
+
+          <p class="mini-heading">Core Engineering Principle</p>
+          <p>Reliable automation requires more than scheduling an event. It requires synchronization between the software's intended state and the physical system's actual state.</p>
+        </div>
+
+        <div class="life-architecture">
+          <div class="life-layer"><div><div class="title">Patient / Caregiver Interface</div><span class="subtitle">Registration · Prescription · Schedule configuration</span></div></div>
+          <div class="arch-arrow">↓</div>
+          <div class="life-layer"><div><div class="title">Application &amp; Data Layer</div><span class="subtitle">Real-time database · Event scheduler · State management</span></div></div>
+          <div class="arch-arrow">⇅</div>
+          <div class="life-layer"><div><div class="title">ESP-Based Embedded Controller</div><span class="subtitle">Scheduling · Hardware communication · Online/offline handling</span></div></div>
+          <div class="life-controllers">
+            <div class="life-controller"><strong>Hall</strong><span>Sensors</span></div>
+            <div class="life-controller"><strong>Servo</strong><span>Locks</span></div>
+            <div class="life-controller"><strong>OLED</strong><span>Alerts</span></div>
+          </div>
+          <div class="arch-arrow">↓</div>
+          <div class="life-compartment">
+            <div>
+              <div class="title">Three-compartment medication unit</div>
+              <div class="pills">
+                <span class="pill">Morning</span>
+                <span class="pill">Afternoon</span>
+                <span class="pill">Night</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="section split-section" id="experience">
+      <div><p class="eyebrow">04 — EXPERIENCE & EDUCATION</p><h2>Learning by building.<br>Improving by shipping.</h2></div>
+      <div class="timeline">
+        <article><span class="timeline-date">2026</span><div><h3>Product Development Intern</h3><p class="timeline-org">ITRON · Bangalore</p><p>Worked across application workflows, test execution visibility, backend integration and operational monitoring.</p></div></article>
+        <article><span class="timeline-date">2026</span><div><h3>B.E. Electronics & Communication</h3><p class="timeline-org">BMS Institute of Technology and Management</p><p>Building a foundation across electronics, communication systems, programming and embedded engineering.</p></div></article>
+      </div>
+    </section>
+
+    <section class="section research-section" id="research">
+      <p class="eyebrow">05 — RESEARCH & NOTES</p><h2>Questions worth investigating.</h2>
+      <p class="research-copy">This space will host technical papers, architecture notes, experiments and lessons learned. The aim is to document the reasoning behind engineering decisions—not just the final result.</p>
+      <div class="research-placeholder"><span>RESEARCH LOG / 001</span><strong>Intent validation as a security boundary</strong><span class="coming-soon">DOCUMENTATION IN PROGRESS</span></div>
+    </section>
+
+    <section class="contact-section section" id="contact">
+      <p class="eyebrow">06 — OPEN CHANNEL</p><h2>Let’s build something<br><span class="gradient-text">that works.</span></h2>
+      <p>Interested in systems engineering, embedded platforms, security architecture or thoughtful technical collaboration.</p>
+      <div class="contact-links">
+        <!-- Replace the placeholder URLs and email before publishing. -->
+        <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub ↗</a>
+        <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+        <a href="mailto:your.email@example.com">Email ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer><span>© 2026 ENGINEERING PORTFOLIO</span><span>BUILT WITH HTML · CSS · JAVASCRIPT · GITHUB PAGES</span><a href="#home">BACK TO TOP ↑</a></footer>
+  <script src="js/main.js"></script>
+</body>
+</html>
